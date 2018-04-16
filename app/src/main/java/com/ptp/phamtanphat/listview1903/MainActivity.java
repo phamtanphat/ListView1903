@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -18,11 +20,20 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;
     ArrayList<String> mangten;
     ArrayAdapter arrayAdapter;
+    Button btnAdd,btnUpdate;
+    EditText edtName;
+    int vitri;
+    String value;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         listView = findViewById(R.id.listview);
+        btnAdd = findViewById(R.id.buttonAdd);
+        btnUpdate = findViewById(R.id.buttonUpdate);
+        edtName = findViewById(R.id.edittextname);
+
         mangten = new ArrayList<>();
         mangten.add("Nguyen Van A");
         mangten.add("Nguyen Van B");
@@ -40,6 +51,31 @@ public class MainActivity extends AppCompatActivity {
 //                Toast.makeText(MainActivity.this, mangten.get(position), Toast.LENGTH_SHORT).show();
 //            }
 //        });
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = edtName.getText().toString();
+
+                mangten.add(name);
+                arrayAdapter.notifyDataSetChanged();
+            }
+        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                value = mangten.get(position);
+                vitri = position;
+                edtName.setText(value);
+            }
+        });
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String value = edtName.getText().toString();
+                mangten.set(vitri,value);
+                arrayAdapter.notifyDataSetChanged();
+            }
+        });
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
@@ -84,15 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-        Yeu cau :
-            View : 1 edittext nhan du lieu nguoi dung truyen vao
-                   1 button xac nhan them du lieu
-                   1 button cap nhat du lieu
-            Code :
-                1 - Click button them du lieu nguoi dung tu edittext
-                2 - Su kien click button cap nhat
-                    * Long click vao item trong list view do du lieu len edittext
-                    * Click vao button cap nhat sau khi da chinh sua xong du lieu
+
     }
 
 }

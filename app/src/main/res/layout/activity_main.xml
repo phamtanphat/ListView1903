@@ -4,8 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.ptp.phamtanphat.listview1903.MainActivity">
 
+    <EditText
+        android:hint="Nhap ten sinh vien"
+        android:id="@+id/edittextname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/buttonAdd"
+        android:layout_gravity="center_horizontal"
+        android:text="Add Sinh vien"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/buttonUpdate"
+        android:layout_gravity="center_horizontal"
+        android:text="Update Sinh vien"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
